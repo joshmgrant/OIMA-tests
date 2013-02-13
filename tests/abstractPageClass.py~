@@ -1,0 +1,6 @@
+
+class abstractPage():
+    """
+    Abstract page object for use with testing
+    """
+    pass
