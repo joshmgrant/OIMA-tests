@@ -1,7 +1,7 @@
 
-from abstractPage import abstractPage
+from AbstractPage import AbstractPage
 
-class BasePage(abstractPage):
+class BasePage(AbstractPage):
     """
     Base class for each page
     """
