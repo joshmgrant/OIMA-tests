@@ -7,17 +7,25 @@ class BaseTest(unittest.TestCase):
     Base test class. All other test classes derive from this one
     """
 
-    @classmethod
-    def startBrowser(self):
-        self.driver = webdriver.Firefox()
+    def __init__(self, browser):
+        self.browser = browser
         self.landingPage = 'http://oima-aimo.ca'
 
-    def setUp(self):
-        self.driver.get(landingPage)
+    @classmethod
+    def setupClass(self):
+        self.driver = self.setupWebDriver()
 
     @classmethod
-    def closeBrowser(self):
+    def tearDownClass(self):
         self.driver.quit()
 
-    def aTest(self):
-        print 'run this test'
+    def loadLandingPage(self):
+        self.driver.get(self.landingPage)
+    
+    def setupWebDriver(self):
+        if browser.lower() == 'firefox':
+            return webdriver.Firefox()
+        elif browser.lower() == 'chrome':
+            return webdriver.Chrome()
+        else:
+            raise RuntimeError("Invalid browser selection, try again")
