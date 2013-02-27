@@ -1,4 +1,5 @@
 
+import py.test
 import unittest
 from selenium import webdriver
 
@@ -8,7 +9,7 @@ class BaseTest(unittest.TestCase):
     """
 
     @classmethod
-    def setupClass(self):
+    def setup_class(self):
         self.browser = 'firefox'
         self.landingPage = 'http://oima-aimo.ca'
         
@@ -23,7 +24,7 @@ class BaseTest(unittest.TestCase):
         self.loadLandingPage()
 
     @classmethod
-    def tearDownClass(self):
+    def tearDown_class(self):
         self.driver.quit()
 
     @classmethod
