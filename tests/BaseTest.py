@@ -11,7 +11,7 @@ class BaseTest(unittest.TestCase):
     @classmethod
     def setup_class(self):
         self.browser = 'firefox'
-        self.landingPage = 'http://oima-aimo.ca'
+        self.landingPage = "http://oima-aimo.ca/en"
         
         # should be abstracted to its own method, setupWebDriver
         if self.browser.lower() == 'firefox':
