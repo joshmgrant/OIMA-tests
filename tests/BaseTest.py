@@ -1,5 +1,6 @@
 
 import py.test
+import os
 import unittest
 from selenium import webdriver
 
@@ -10,14 +11,16 @@ class BaseTest(unittest.TestCase):
 
     @classmethod
     def setup_class(self):
-        self.browser = 'firefox'
-        self.landingPage = "http://oima-aimo.ca/en"
+        self.browser = 'chrome'
+        self.landingPage = "www.google.com"
         
         # should be abstracted to its own method, setupWebDriver
         if self.browser.lower() == 'firefox':
             self.driver = webdriver.Firefox()
         elif self.browser.lower() == 'chrome':
-            self.driver =  webdriver.Chrome()
+            chromedriver = "/home/josh/programming/selenium/chromedriver"
+            os.environ["webdriver.chrome.driver"] = chromedriver
+            self.driver =  webdriver.Chrome(chromedriver)
         else:
             raise RuntimeError("Invalid browser selection, try again")
 
