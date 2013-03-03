@@ -33,6 +33,9 @@ class BaseTest(unittest.TestCase):
     @classmethod
     def loadLandingPage(self):
         self.driver.get(self.landingPage)
-    
+
+    def setUp(self):
+        self.loadLandingPage()
+
     def setupWebDriver(self):
         pass

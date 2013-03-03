@@ -1,2 +1,3 @@
 # gitignore for oima tests
 *py~
+*chromedriver.log
