@@ -10,7 +10,7 @@ class BaseTest(unittest.TestCase):
     """
 
     def __init__(self):
-        self.browse = 'chrome'
+        self.browser = 'chrome'
         self.landingpage = "http://www.oima-amio.ca"
 
     @classmethod
