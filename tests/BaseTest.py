@@ -9,11 +9,13 @@ class BaseTest(unittest.TestCase):
     Base test class. All other test classes derive from this one
     """
 
+    def __init__(self):
+        self.browse = 'chrome'
+        self.landingpage = "http://www.oima-amio.ca"
+
     @classmethod
     def setup_class(self):
-        self.browser = 'chrome'
-        self.landingPage = "www.oima-amio.com/en"
-        
+              
         # should be abstracted to its own method, setupWebDriver
         if self.browser.lower() == 'firefox':
             self.driver = webdriver.Firefox()
@@ -32,7 +34,7 @@ class BaseTest(unittest.TestCase):
 
     @classmethod
     def loadLandingPage(self):
-        self.driver.get(self.landingPage)
+        self.driver.get(landingPage)
 
     @classmethod
     def setUp(self):
