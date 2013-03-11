@@ -1,4 +1,5 @@
 from BaseTest import BaseTest
+import pytest
 
 class HomePageTest(BaseTest):
     """
