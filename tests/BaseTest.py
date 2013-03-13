@@ -10,32 +10,18 @@ class BaseTest(unittest.TestCase):
     """
 
     def __init__(self):
+        unittest.TestCase.__init__(self)
         self.browser = 'chrome'
         self.landingpage = "http://www.oima-amio.ca"
+        self.driver = self.setup_webdriver(self.browser)
 
-    def setup_class(self):
-        self.browser = 'firefox'
-        self.landingpage = "http://www.oima-amio.ca"
-             
-        # should be abstracted to its own method, setupWebDriver
-        if self.browser.lower() == 'firefox':
-            self.driver = webdriver.Firefox()
-        elif self.browser.lower() == 'chrome':
-            chromedriver = "/home/josh/programming/selenium/chromedriver"
-            os.environ["webdriver.chrome.driver"] = chromedriver
-            self.driver = webdriver.Chrome(chromedriver)
-        else:
-            raise RuntimeError("Invalid browser selection, try again")
-
-        self.driver.get(self.landingpage)
-
-    def teardown_class(self):
+    def load_landing_page(self, page_url):
+        self.driver.get(page_url)
+        
+    def close(self):
         self.driver.quit()
 
-    def loadLandingPage(self, page_url):
-        self.driver.get(page_url)
-
-    def setupWebDriver(self, browser):
+    def open_webdriver(self, browser):
         if browser.lower() == 'firefox':
             return webdriver.Firefox()
         elif browser.lower() == 'chrome':

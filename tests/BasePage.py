@@ -1,8 +1,9 @@
 
 from AbstractPage import AbstractPage
 from selenium import webdriver
+import pytest
 
-class BasePage(AbstractPage):
+class BasePage():
     """
     Base class for each page
     """
