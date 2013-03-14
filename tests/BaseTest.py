@@ -4,24 +4,25 @@ import os
 import unittest
 from selenium import webdriver
 
-class BaseTest(unittest.TestCase):
+class BaseTest(object):
     """
     Base test class. All other test classes derive from this one
     """
 
-    def __init__(self):
-        unittest.TestCase.__init__(self)
+    def setUp(self):
         self.browser = 'chrome'
-        self.landingpage = "http://www.oima-amio.ca"
+        self.landingpage = "http://www.google.com"        
         self.driver = self.setup_webdriver(self.browser)
+
+        self.load_landing_page(self.landingpage)
 
     def load_landing_page(self, page_url):
         self.driver.get(page_url)
         
-    def close(self):
+    def tearDown(self):
         self.driver.quit()
 
-    def open_webdriver(self, browser):
+    def setup_webdriver(self, browser):
         if browser.lower() == 'firefox':
             return webdriver.Firefox()
         elif browser.lower() == 'chrome':

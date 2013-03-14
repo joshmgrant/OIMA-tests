@@ -1,17 +1,21 @@
 from BaseTest import BaseTest
 from homepage import HomePage
+import unittest
 import pytest
+from time import sleep
 
-class HomePageTest(BaseTest):
+class HomePageTest(unittest.TestCase, BaseTest):
     """
     tests for the home page
     """
-    def setUp(self):
-        self.driver = self.setup_webdriver()
-    
-    def tearDown(self):
-        self.close()
+    #def setUp(self):
+    #    setUp(self)
+
+    #def tearDown(self):
+    #    super.tearDown(self)
 
     def test_title(self):
         h = HomePage(self.driver)
-        self.quit_webdriver()
+        print "got here"
+        sleep(3)
+        self.driver.quit()
