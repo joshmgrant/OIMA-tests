@@ -4,18 +4,17 @@ import unittest
 import pytest
 from time import sleep
 
-class HomePageTest(unittest.TestCase, BaseTest):
+class HomePageTest(BaseTest, unittest.TestCase):
     """
     tests for the home page
     """
-    #def setUp(self):
-    #    setUp(self)
-
-    #def tearDown(self):
-    #    super.tearDown(self)
 
     def test_title(self):
         h = HomePage(self.driver)
         print "got here"
-        sleep(3)
-        self.driver.quit()
+        sleep(1)
+        assert h.getExpectedPageName() == "Ontario Independent Music Archive"
+
+    def test_fail(self):
+        h = HomePage(self.driver)
+        assert False

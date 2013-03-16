@@ -10,8 +10,8 @@ class BaseTest(object):
     """
 
     def setUp(self):
-        self.browser = 'chrome'
-        self.landingpage = "http://www.google.com"        
+        self.browser = 'firefox'
+        self.landingpage = "http://www.oima-amio.ca"        
         self.driver = self.setup_webdriver(self.browser)
 
         self.load_landing_page(self.landingpage)
