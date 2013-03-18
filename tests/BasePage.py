@@ -1,6 +1,7 @@
 
 from AbstractPage import AbstractPage
 from selenium import webdriver
+from selenium.webdriver.support import ui
 import pytest
 
 class BasePage():
@@ -10,6 +11,10 @@ class BasePage():
 
     def __init__(self, driver):
         self.driver = driver
+        self.wait = ui.WebDriverWait(self.driver, 10)
 
-    def getExpectedPageName():
+    def getExpectedPageName(self):
         raise NotImplementedError("getExpectedPageName() not implemented")
+
+    def waitPageLoad(self, page_title):
+        self.wait.until(lambda driver: driver.title == page_title)

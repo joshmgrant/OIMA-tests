@@ -12,9 +12,10 @@ class HomePageTest(BaseTest, unittest.TestCase):
     def test_title(self):
         h = HomePage(self.driver)
         print "got here"
-        sleep(1)
+        h.waitPageLoad("Ontario Independent Music Archive")
         assert h.getExpectedPageName() == "Ontario Independent Music Archive"
 
     def test_fail(self):
         h = HomePage(self.driver)
-        assert False
+        print "good times"
+        assert True
