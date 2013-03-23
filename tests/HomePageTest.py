@@ -15,7 +15,7 @@ class HomePageTest(BaseTest, unittest.TestCase):
         h.waitPageLoad("Ontario Independent Music Archive")
         assert h.getExpectedPageName() == "Ontario Independent Music Archive"
 
-    def test_fail(self):
+    def test_browseLink(self):
         h = HomePage(self.driver)
-        print "good times"
-        assert True
+        h.goToBrowseArchive()
+        sleep(3)

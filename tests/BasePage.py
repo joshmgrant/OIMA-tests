@@ -17,4 +17,4 @@ class BasePage():
         raise NotImplementedError("getExpectedPageName() not implemented")
 
     def waitPageLoad(self, page_title):
-        self.wait.until(lambda driver: driver.title == page_title)
+        self.wait.until(lambda driver: page_title in driver.title)
