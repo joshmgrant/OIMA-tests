@@ -17,4 +17,6 @@ class BrowsePageTest(BaseTest, unittest.TestCase):
     def test_playingRandomTrack(self):
         b = BrowsePage(self.driver)
         b.goToHere()
+        b.searchArchive("general")
+        sleep(3)
         

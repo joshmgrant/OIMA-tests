@@ -16,6 +16,7 @@ class BrowsePage(BasePage):
 
     def goToHere(self):    
         self.driver.get("http://oima-amio.ca/en/browse")
+        self.waitPageLoad("Browse music")
 
     def getExpectedPageName(self):
         return 'Browse music|Ontario Independent Music Archive'
@@ -23,3 +24,16 @@ class BrowsePage(BasePage):
     def goToHomePage(self):
         self.driver.find_element_by_xpath(locators['homeLink']).click()
         self.waitPageLoad("Ontario Independent Music Archive")
+
+        return HomePage(self.driver)
+
+    def searchArchive(self, terms):
+        search_box = self.driver.find_element_by_id("edit-s")
+        search_button = self.driver.find_element_by_id("edit-submit-browse")
+
+        search_box.send_keys(terms)
+        search_button.click()
+
+        self.waitPageLoad("Browse music")
+
+               

@@ -1,4 +1,5 @@
 from BasePage import BasePage
+from browsepage import BrowsePage
 from selenium import webdriver
 
 locators = {'browseLink':'//a[@href=\'/en/browse\']', 
@@ -15,3 +16,5 @@ class HomePage(BasePage):
     def goToBrowseArchive(self):
         self.driver.find_element_by_xpath(locators['browseLink']).click()
         self.waitPageLoad("Browse music")
+
+        return BrowsePage(self.driver)
