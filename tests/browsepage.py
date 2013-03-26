@@ -1,5 +1,7 @@
 from BasePage import BasePage
 from selenium import webdriver
+from random import randint
+import requests
 
 locators = {'homeLink':'//a[@href=\'/en\']',
             'browseLink':'//a[@href=\'/en/browse\']', 
@@ -36,4 +38,16 @@ class BrowsePage(BasePage):
 
         self.waitPageLoad("Browse music")
 
+    def followRandomLink(self):
+        browse_links = self.driver.find_elements_by_xpath('//a[contains(@href, \'/browse/music/results?f[0]\')]')
+
+        rand_link = randint(0,len(browse_links)-1)
+        browse_links[rand_link].click()
+
+        self.waitPageLoad("Browse music")
+    
+    def findSongLinkStatus(self):
+        play_list = self.driver.find_elements_by_partial_link_text("Play")
                
+        r = requests.get(play_list[0].get_attribute("href"))
+        return r.status_code
