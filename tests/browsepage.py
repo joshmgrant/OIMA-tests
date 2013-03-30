@@ -13,7 +13,8 @@ locators = {'homeLink':'//a[@href=\'/en\']',
             'blogLink':'//a[@href=\'/en/blog\']', 
             'aboutLink':'//a[@href=\'/en/page/about-us\']', 
             'contactLink':'//a[@href=\'/en/contact\']', 
-            'blankResults':'//div[@class=\'empty-view\']'}
+            'blankResults':'//div[@class=\'empty-view\']', 
+            'pageList':'//ul[@class=\'pager\']'}
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger()
@@ -50,6 +51,11 @@ class BrowsePage(BasePage):
 
         rand_link = randint(0,len(browse_links)-1)
         browse_links[rand_link].click()
+
+        if self.driver.find_elements_by_xpath(locators['pageList']):
+            pages = self.driver.find_elements_by_xpath(locators['pageList'] + '/li/a')
+            rand_page = randint(0, len(pages)-1)
+            pages[rand_page].click()
 
         self.waitPageLoad("Browse music")
     
