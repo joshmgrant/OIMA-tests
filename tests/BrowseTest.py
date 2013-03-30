@@ -19,6 +19,21 @@ class BrowsePageTest(BaseTest, unittest.TestCase):
         
         b.goToHere()
         b.followRandomLink()
-        assert b.findSongLinkStatus() == 200
+        self.assertEqual(b.findSongLinkStatus(), 200, "Did not receive good response from given link")
+
+    def test_addingRandomTrackToPlaylist(self):
+        b = BrowsePage(self.driver)
+        
+        b.goToHere()
+        b.followRandomLink()
+        self.assertEqual(b.findAddToPlayList(), 200, "Did not receive good response from given link")
+
+    def test_downloadRandomTrack(self):
+        b = BrowsePage(self.driver)
+        
+        b.goToHere()
+        b.followRandomLink()
+        self.assertEqual(b.findDownloadList(), 200, "Did not receive good response from given link")
+        
         
         

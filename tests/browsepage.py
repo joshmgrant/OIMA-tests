@@ -2,6 +2,9 @@ from BasePage import BasePage
 from selenium import webdriver
 from random import randint
 import requests
+import logging
+
+from selenium.common.exceptions import NoSuchElementException
 
 locators = {'homeLink':'//a[@href=\'/en\']',
             'browseLink':'//a[@href=\'/en/browse\']', 
@@ -9,7 +12,11 @@ locators = {'homeLink':'//a[@href=\'/en\']',
             'resourceLink':'//a[@href=\'/en/resources\']', 
             'blogLink':'//a[@href=\'/en/blog\']', 
             'aboutLink':'//a[@href=\'/en/page/about-us\']', 
-            'contactLink':'//a[@href=\'/en/contact\']'}
+            'contactLink':'//a[@href=\'/en/contact\']', 
+            'blankResults':'//div[@class=\'empty-view\']'}
+
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger()
 
 class BrowsePage(BasePage):
     """
@@ -47,7 +54,33 @@ class BrowsePage(BasePage):
         self.waitPageLoad("Browse music")
     
     def findSongLinkStatus(self):
-        play_list = self.driver.find_elements_by_partial_link_text("Play")
+        
+        if self.driver.find_elements_by_xpath(locators['blankResults']):
+            log.info("Link produced no results")
+            return
+            
+        play_list = self.driver.find_elements_by_partial_link_text("Play")    
                
-        r = requests.get(play_list[0].get_attribute("href"))
-        return r.status_code
+        if play_list:
+            r = requests.get(play_list[0].get_attribute("href"))
+            return r.status_code
+        else:
+            raise NoSuchElementException("No play links found")
+
+    def findAddToPlayList(self):
+        add_list = self.driver.find_elements_by_partial_link_text("Add to play")
+        
+        if not add_list:
+            r = requests.get(play_list[0].get_attribute("href"))
+            return r.status_code
+        else:
+            raise NoSuchElementException("No add to play list links found")
+
+    def findDownloadList(self):
+        dl_list = self.driver.find_elements_by_partial_link_text("Download")
+        
+        if not dl_list:
+            r = requests.get(dl_list[0].get_attribute("href"))
+            return r.status_code
+        else:
+            raise NoSuchElementException("No download links found")
