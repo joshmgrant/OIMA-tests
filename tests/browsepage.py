@@ -68,18 +68,26 @@ class BrowsePage(BasePage):
             raise NoSuchElementException("No play links found")
 
     def findAddToPlayList(self):
+        if self.driver.find_elements_by_xpath(locators['blankResults']):
+            log.info("Link produced no results")
+            return
+
         add_list = self.driver.find_elements_by_partial_link_text("Add to play")
         
-        if not add_list:
-            r = requests.get(play_list[0].get_attribute("href"))
+        if add_list:
+            r = requests.get(add_list[0].get_attribute("href"))
             return r.status_code
         else:
             raise NoSuchElementException("No add to play list links found")
 
     def findDownloadList(self):
+        if self.driver.find_elements_by_xpath(locators['blankResults']):
+            log.info("Link produced no results")
+            return
+
         dl_list = self.driver.find_elements_by_partial_link_text("Download")
         
-        if not dl_list:
+        if dl_list:
             r = requests.get(dl_list[0].get_attribute("href"))
             return r.status_code
         else:
